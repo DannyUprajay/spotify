@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Register</h1>
+
+    <div class="d-flex align-items justify-content w-25 mx-auto text-light">
+        {{ form_errors(registrationForm, {"attr" : { "class": "d-flex justify-content-center text-success"}}) }}
+
+        {{ form_start(registrationForm, {"attr" : { "class": "bg-dark p-5 w-100"}}) }}
+        
+            {{ form_row(registrationForm.name , {"attr" : { "class": "mb-5 d-flex w-100  text-success"}}) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password', "attr" : { "class" : "d-flex mb-5 w-100 text-secondary"}
+            }) }}
+            <div class="mb-8 justify-content-between d-flex ">
+            {{ form_label(registrationForm.agreeTerms) }}
+            {{ form_widget(registrationForm.agreeTerms) }}
+            </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-light mt-2">Register</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+
+{% endblock %}

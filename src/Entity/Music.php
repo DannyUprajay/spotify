@@ -25,6 +25,9 @@ class Music
     #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'music')]
     private Collection $artists;
 
+    #[ORM\Column(length: 255)]
+    private ?string $cover = null;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
@@ -79,6 +82,18 @@ class Music
     public function removeArtist(Artist $artist): static
     {
         $this->artists->removeElement($artist);
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): static
+    {
+        $this->cover = $cover;
 
         return $this;
     }
