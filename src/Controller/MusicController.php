@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Music;
 use App\Form\MusicType;
 use App\Repository\MusicRepository;
+use App\Service\FileUploaderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +23,18 @@ class MusicController extends AbstractController
     }
 
     #[Route('/new', name: 'app_music_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MusicRepository $musicRepository): Response
+    public function new(Request $request, MusicRepository $musicRepository, FileUploaderService $uploaderService): Response
     {
         $music = new Music();
         $form = $this->createForm(MusicType::class, $music);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $coverFile = $form->get('cover')->getData();
+            if ($coverFile) {
+                $coverFileName = $uploaderService->upload($coverFile);
+                $music->setCover($coverFileName);
+            }
             $musicRepository->save($music, true);
 
             return $this->redirectToRoute('app_music_index', [], Response::HTTP_SEE_OTHER);

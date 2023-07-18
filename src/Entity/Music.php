@@ -25,7 +25,7 @@ class Music
     #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'music')]
     private Collection $artists;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $cover = null;
 
     public function __construct()

@@ -20,25 +20,21 @@ class MusicType extends AbstractType
                 "widget" => "single_text"
             ])
             ->add('artists')
-
-
-
             ->add('cover', FileType::class, [
                 'label' => "Votre cover",
-                'mapped' => false,
                 'required' => false,
-                
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/gif',
-                            'image/jpeg',
-                            'image/jpg',
+                            'image/jpeg,',
+                            'image/pjpeg',
+                            'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
+                        'mimeTypesMessage' => 'Please upload a valid image document',
+                    ]),
                 ],
+                'data_class' => null,
             ])
             // ...
         ;
