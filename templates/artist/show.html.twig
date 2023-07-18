@@ -19,6 +19,16 @@
                 <th>LastName</th>
                 <td>{{ artist.lastName }}</td>
             </tr>
+            {% for music in artist.music %}
+            <tr>
+                <th>Name</th>
+                <td>{{ music.name }}</td>
+            </tr>
+            {# <tr>
+                <th>First Name</th>
+                <td>{{ actor.firstName }}</td>
+            </tr> #}
+        {% endfor %}
         </tbody>
     </table>
 
