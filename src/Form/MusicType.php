@@ -25,11 +25,9 @@ class MusicType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '8024k',
                         'mimeTypes' => [
-                            'image/jpeg,',
-                            'image/pjpeg',
-                            'image/png',
+                            'image/*'
                         ],
                         'mimeTypesMessage' => 'Please upload a valid image document',
                     ]),

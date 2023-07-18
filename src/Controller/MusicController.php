@@ -55,12 +55,17 @@ class MusicController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_music_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Music $music, MusicRepository $musicRepository): Response
+    public function edit(Request $request, Music $music, MusicRepository $musicRepository , FileUploaderService $uploaderService): Response
     {
         $form = $this->createForm(MusicType::class, $music);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $coverFile = $form->get('cover')->getData();
+            if ($coverFile) {
+                $coverFileName = $uploaderService->upload($coverFile);
+                $music->setCover($coverFileName);
+            }
             $musicRepository->save($music, true);
 
             return $this->redirectToRoute('app_music_index', [], Response::HTTP_SEE_OTHER);

@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Album</th>
                 <th>Name</th>
                 <th>ReleaseDate</th>
                 <th>actions</th>
@@ -17,7 +17,7 @@
         <tbody>
         {% for music in music %}
             <tr>
-                <td>{{ music.cover }}</td>
+                <td><img style="height: 250px; " src="{{ asset('uploads/covers/') ~ music.cover }}" class="logo" alt=""></td>
                 <td>{{ music.name }}</td>
                 <td>{{ music.releaseDate ? music.releaseDate|date('Y-m-d') : '' }}</td>
                 <td>
