@@ -19,6 +19,11 @@
                 <th>ReleaseDate</th>
                 <td>{{ music.releaseDate ? music.releaseDate|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Affiche</th>
+                <td><img src="{{ asset('uploads/covers/') ~ music.cover }}" class="logo" alt=""></td>
+            </tr>
+
         </tbody>
     </table>
 
