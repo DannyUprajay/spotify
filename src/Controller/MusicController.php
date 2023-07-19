@@ -6,10 +6,12 @@ use App\Entity\Music;
 use App\Form\MusicType;
 use App\Repository\MusicRepository;
 use App\Service\FileUploaderService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 #[Route('/music')]
 class MusicController extends AbstractController
@@ -22,6 +24,7 @@ class MusicController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_music_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MusicRepository $musicRepository, FileUploaderService $uploaderService): Response
     {
@@ -54,6 +57,8 @@ class MusicController extends AbstractController
         ]);
     }
 
+
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_music_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Music $music, MusicRepository $musicRepository , FileUploaderService $uploaderService): Response
     {
@@ -76,7 +81,7 @@ class MusicController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_music_delete', methods: ['POST'])]
     public function delete(Request $request, Music $music, MusicRepository $musicRepository): Response
     {

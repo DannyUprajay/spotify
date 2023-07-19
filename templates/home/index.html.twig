@@ -9,10 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    {% if app.user is defined %}
+    {% if app.user.name  is defined %}
         <h1>Welcome back
             {{ app.user.name}}
             ✅</h1>
+        {%  else %}
+        <h1>Hello</h1>
     {% endif %}
 
     This friendly message is coming from:
