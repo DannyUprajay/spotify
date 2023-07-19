@@ -20,14 +20,10 @@
                 <td>{{ artist.lastName }}</td>
             </tr>
             {% for music in artist.music %}
-            <tr>
-                <th>Name</th>
-                <td>{{ music.name }}</td>
+             <tr>
+                <th>{{ music.name }}</th>
+                <td> <img style="height: 200px" src="{{ asset('uploads/covers/') ~ music.cover }}" > </td>
             </tr>
-            {# <tr>
-                <th>First Name</th>
-                <td>{{ actor.firstName }}</td>
-            </tr> #}
         {% endfor %}
         </tbody>
     </table>
