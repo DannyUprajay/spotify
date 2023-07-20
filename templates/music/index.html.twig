@@ -5,35 +5,26 @@
 {% block body %}
     <h1 class="text-center">ALBUM</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Album</th>
-                <th>Name</th>
-                <th>ReleaseDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for music in music %}
-            <tr>
-                <td><img style="height: 250px; " src="{{ asset('uploads/covers/') ~ music.cover }}" class="logo" alt=""></td>
-                <td>{{ music.name }}</td>
-                <td>{{ music.releaseDate ? music.releaseDate|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_music_show', {'id': music.id}) }}">show</a>
-                    {% if is_granted("ROLE_ADMIN")  %}
-                    <a href="{{ path('app_music_edit', {'id': music.id}) }}">edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="d-flex container justify-content-center gap-3 ">
+
+
+    {% for music in music %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" style="height: 250px; " src="{{ asset('uploads/covers/') ~ music.cover }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title text-center">{{ music.name }}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="d-flex justify-content-between">
+            <a href="{{ path('app_music_show', {'id': music.id}) }}">show</a>
+            {% if is_granted("ROLE_ADMIN")  %}
+                <a href="{{ path('app_music_edit', {'id': music.id}) }}">edit</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
     {% if is_granted("ROLE_ADMIN")  %}
     <a href="{{ path('app_music_new') }}">+ Create new</a>
     {% endif %}
